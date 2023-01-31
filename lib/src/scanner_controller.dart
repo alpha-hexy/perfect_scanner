@@ -1,5 +1,4 @@
 import 'dart:developer';
-import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:google_mlkit_barcode_scanning/google_mlkit_barcode_scanning.dart';
 import 'package:image_picker/image_picker.dart';
@@ -50,12 +49,8 @@ class ScannerController {
   static Future<String> getQrFromImagePath(String path) async {
     String qrData = '';
     try {
-      if (await File(path).exists()) {
-        final inputImage = InputImage.fromFilePath(path);
-        return await ImageHandler().processImage(inputImage);
-      } else {
-        throw Exception("Image Path is invalid!");
-      }
+      final inputImage = InputImage.fromFilePath(path);
+      return await ImageHandler().processImage(inputImage);
     } catch (e) {
       log(
         e.toString(),
