@@ -41,6 +41,28 @@ class ScannerController {
     }
     return qrData;
   }
+  
+  
+  /// Get qr from the provided image path.
+  ///
+  /// This function will return a future string as a result
+  static Future<String> getQrFromImagePath(String path) async {
+    String qrData = '';
+    try {
+      if (await File(path).exists()) {   
+        final inputImage = InputImage.fromFilePath(path);
+        return await ImageHandler().processImage(inputImage);
+      } else {
+        throw Exception("Invalid File path");
+      }
+    } catch (e) {
+      log(
+        e.toString(),
+        name: 'SCANNER',
+      );
+    }
+    return qrData;
+  }
 
   ///Toggle the flash light while scanning.
   ///
