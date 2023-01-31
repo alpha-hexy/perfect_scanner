@@ -50,7 +50,7 @@ class ScannerController {
   static Future<String> getQrFromImagePath(String path) async {
     String qrData = '';
     try {
-      if (File(path).exists()) {
+      if (await File(path).exists()) {
         final inputImage = InputImage.fromFilePath(path);
         return await ImageHandler().processImage(inputImage);
       } else {
